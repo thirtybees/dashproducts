@@ -24,7 +24,7 @@
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
-if (!defined('_PS_VERSION_'))
+if (!defined('_TB_VERSION_'))
 	exit;
 
 class DashProducts extends Module
@@ -33,8 +33,8 @@ class DashProducts extends Module
 	{
 		$this->name = 'dashproducts';
 		$this->tab = 'dashboard';
-		$this->version = '0.3.5';
-		$this->author = 'PrestaShop';
+		$this->version = '1.0.0';
+		$this->author = 'thirty bees';
 
 		$this->push_filename = _PS_CACHE_DIR_.'push/activity';
 		$this->allow_push = true;
