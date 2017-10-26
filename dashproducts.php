@@ -39,7 +39,7 @@ class DashProducts extends Module
     {
         $this->name = 'dashproducts';
         $this->tab = 'dashboard';
-        $this->version = '1.0.0';
+        $this->version = '2.0.1';
         $this->author = 'thirty bees';
 
         $this->push_filename = _PS_CACHE_DIR_.'push/activity';
