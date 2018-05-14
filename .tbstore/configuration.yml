@@ -1,0 +1,14 @@
+module_name: Dashboard Products
+compatible_versions: 1.0.0+
+author: thirty bees
+category: back office
+tags:
+  - analysis
+  - sales analysis
+  - revenue
+  - ranking
+description_short: Adds a block with a table of your latest orders and a ranking of your products.
+description: description.md
+images:
+  - image-1.png
+license: AFL 3.0
