@@ -41,6 +41,7 @@ class DashProducts extends Module
         $this->tab = 'dashboard';
         $this->version = '2.0.1';
         $this->author = 'thirty bees';
+        $this->need_instance = 0;
 
         $this->push_filename = _PS_CACHE_DIR_.'push/activity';
         $this->allow_push = true;
@@ -48,6 +49,7 @@ class DashProducts extends Module
         parent::__construct();
         $this->displayName = $this->l('Dashboard Products');
         $this->description = $this->l('Adds a block with a table of your latest orders and a ranking of your products');
+        $this->tb_versions_compliancy = '> 1.0.0';
         $this->ps_versions_compliancy = ['min' => '1.6', 'max' => _PS_VERSION_];
     }
 
