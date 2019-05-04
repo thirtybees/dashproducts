@@ -51,7 +51,7 @@ class DashProducts extends Module
         $this->description = $this->l('Adds a block with a table of your latest orders and a ranking of your products');
         $this->tb_versions_compliancy = '> 1.0.0';
         $this->tb_min_version = '1.0.0';
-        $this->ps_versions_compliancy = ['min' => '1.6', 'max' => _PS_VERSION_];
+        $this->ps_versions_compliancy = ['min' => '1.6', 'max' => '1.6.1.99'];
     }
 
     /**
