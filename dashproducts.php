@@ -241,7 +241,7 @@ class DashProducts extends Module
                 ->leftJoin(bqSQL(OrderDetail::$definition['table']), 'od', 'o.`id_order` = od.`id_order`')
                 ->leftJoin(bqSQL(Product::$definition['table']), 'p', 'p.`id_product` = `product_id`')
                 ->leftJoin(bqSQL(Product::$definition['table']).'_attribute', 'pa', 'pa.`id_product_attribute` = od.`product_attribute_id`')
-                ->where('`invoice_date` BETWEEN "'.psQL($dateFrom).' 00:00:00" AND "'.pSQL($dateTo).' 23:59:59"')
+                ->where('o.`date_add` BETWEEN "'.psQL($dateFrom).' 00:00:00" AND "'.pSQL($dateTo).' 23:59:59"')
                 ->where('`valid` = 1 '.Shop::addSqlRestriction(false, 'o'))
                 ->groupBy('`product_id`, product_attribute_id')
                 ->orderBy('`total` DESC')
