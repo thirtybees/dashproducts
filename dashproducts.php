@@ -254,7 +254,7 @@ class DashProducts extends Module
             if (($rowImage = Product::getCover($productObj->id)) && $rowImage['id_image']) {
                 $image = new Image($rowImage['id_image']);
                 $pathToImage = _PS_PROD_IMG_DIR_.$image->getExistingImgPath().'.'.$this->context->controller->imageType;
-                $img = ImageManager::thumbnail($pathToImage, 'product_mini_'.$productObj->id.'.'.$this->context->controller->imageType, 45, $this->context->controller->imageType);
+                $img = ImageManager::thumbnail($pathToImage, 'product_mini_'.$productObj->id.'_'.$this->context->shop->id.'.'.$this->context->controller->imageType, 45, $this->context->controller->imageType);
             }
 
             $productPrice = $product['price'];
@@ -354,7 +354,7 @@ class DashProducts extends Module
                     if (($rowImage = Product::getCover($productObj->id)) && $rowImage['id_image']) {
                         $image = new Image($rowImage['id_image']);
                         $pathToImage = _PS_PROD_IMG_DIR_.$image->getExistingImgPath().'.'.$this->context->controller->imageType;
-                        $img = ImageManager::thumbnail($pathToImage, 'product_mini_'.$productObj->id.'.'.$this->context->controller->imageType, 45, $this->context->controller->imageType);
+                        $img = ImageManager::thumbnail($pathToImage, 'product_mini_'.$productObj->id.'_'.$this->context->shop->id.'.'.$this->context->controller->imageType, 45, $this->context->controller->imageType);
                     }
 
                     $tr = [];
