@@ -250,12 +250,7 @@ class DashProducts extends Module
             }
             $category = new Category($productObj->getDefaultCategory(), $this->context->language->id);
 
-            $img = '';
-            if (($rowImage = Product::getCover($productObj->id)) && $rowImage['id_image']) {
-                $image = new Image($rowImage['id_image']);
-                $pathToImage = _PS_PROD_IMG_DIR_.$image->getExistingImgPath().'.'.$this->context->controller->imageType;
-                $img = ImageManager::thumbnail($pathToImage, 'product_mini_'.$productObj->id.'.'.$this->context->controller->imageType, 45, $this->context->controller->imageType);
-            }
+            $img = $this->getProductImageTag($productObj);
 
             $productPrice = $product['price'];
             if (isset($product['price_attribute']) && $product['price_attribute'] != '0.000000') {
@@ -350,12 +345,7 @@ class DashProducts extends Module
                         continue;
                     }
 
-                    $img = '';
-                    if (($rowImage = Product::getCover($productObj->id)) && $rowImage['id_image']) {
-                        $image = new Image($rowImage['id_image']);
-                        $pathToImage = _PS_PROD_IMG_DIR_.$image->getExistingImgPath().'.'.$this->context->controller->imageType;
-                        $img = ImageManager::thumbnail($pathToImage, 'product_mini_'.$productObj->id.'.'.$this->context->controller->imageType, 45, $this->context->controller->imageType);
-                    }
+                    $img = $this->getProductImageTag($productObj);
 
                     $tr = [];
                     $tr[] = [
@@ -693,5 +683,29 @@ class DashProducts extends Module
     public function hookActionSearch($params)
     {
         Tools::changeFileMTime($this->push_filename);
+    }
+
+    /**
+     * Returns tag for product image
+     *
+     * @param Product $productObj
+     * @return string
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
+     */
+    protected function getProductImageTag(Product $productObj)
+    {
+        $coverImage = Product::getCover($productObj->id);
+        if ($coverImage && $coverImage['id_image']) {
+            if (method_exists('ImageManager', 'getProductImageThumbnailTag')) {
+                return ImageManager::getProductImageThumbnailTag($coverImage['id_image']);
+            } else {
+                $image = new Image($coverImage['id_image']);
+                $thumbFileName = 'image_mini_'.(int) $image->id . '.jpg';
+                $pathToImage = _PS_PROD_IMG_DIR_ . $image->getExistingImgPath() . '.jpg';
+                return ImageManager::thumbnail($pathToImage, $thumbFileName, 45, 'jpg');
+            }
+        }
+        return '';
     }
 }
