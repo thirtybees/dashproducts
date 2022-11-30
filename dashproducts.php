@@ -154,7 +154,7 @@ class DashProducts extends Module
             $tr = [];
             $tr[] = [
                 'id'    => 'firstname_lastname',
-                'value' => '<a href="'.$this->context->link->getAdminLink('AdminCustomers', true).'&id_customer='.$order['id_customer'].'&viewcustomer">'.Tools::htmlentitiesUTF8($order['firstname']).' '.Tools::htmlentitiesUTF8($order['lastname']).'</a>',
+                'value' => '<a href="'.$this->context->link->getAdminLink('AdminCustomers').'&id_customer='.$order['id_customer'].'&viewcustomer">'.Tools::htmlentitiesUTF8($order['firstname']).' '.Tools::htmlentitiesUTF8($order['lastname']).'</a>',
                 'class' => 'text-left',
             ];
             $tr[] = [
@@ -279,7 +279,7 @@ class DashProducts extends Module
                 ],
                 [
                     'id'    => 'product',
-                    'value' => '<a href="'.$this->context->link->getAdminLink('AdminProducts', true).'&id_product='.$productObj->id.'&updateproduct">'.Tools::htmlentitiesUTF8($product['product_name']).'</a>'.'<br/>'.Tools::displayPrice($productPrice),
+                    'value' => '<a href="'.$this->context->link->getAdminLink('AdminProducts').'&id_product='.$productObj->id.'&updateproduct">'.Tools::htmlentitiesUTF8($product['product_name']).'</a>'.'<br/>'.Tools::displayPrice($productPrice),
                     'class' => 'text-center',
                 ],
                 [
@@ -674,7 +674,6 @@ class DashProducts extends Module
         $lang = new Language((int) Configuration::get('PS_LANG_DEFAULT'));
         $helper->default_form_language = $lang->id;
         $helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
-        $this->fields_form = [];
         $helper->id = (int) Tools::getValue('id_carrier');
         $helper->identifier = $this->identifier;
         $helper->submit_action = 'submitDashConfig';
@@ -735,7 +734,7 @@ class DashProducts extends Module
                 $image = new Image($coverImage['id_image']);
                 $thumbFileName = 'image_mini_'.(int) $image->id . '.jpg';
                 $pathToImage = _PS_PROD_IMG_DIR_ . $image->getExistingImgPath() . '.jpg';
-                return ImageManager::thumbnail($pathToImage, $thumbFileName, 45, 'jpg');
+                return ImageManager::thumbnail($pathToImage, $thumbFileName, 45);
             }
         }
         return '';
