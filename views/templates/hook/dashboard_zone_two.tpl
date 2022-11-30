@@ -22,7 +22,7 @@
  * PrestaShop is an internationally registered trademark of PrestaShop SA.
  *}
 
-<section id="dashproducts" class="panel widget {if $allow_push} allow_push{/if}">
+<section id="dashproducts" class="panel widget">
   <header class="panel-heading">
     <i class="icon-bar-chart"></i> {l s='Products and Sales' mod='dashproducts'}
     <span class="panel-heading-action">

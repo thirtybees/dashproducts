@@ -41,12 +41,9 @@ class DashProducts extends Module
     {
         $this->name = 'dashproducts';
         $this->tab = 'dashboard';
-        $this->version = '2.0.4';
+        $this->version = '2.1.0';
         $this->author = 'thirty bees';
         $this->need_instance = 0;
-
-        $this->push_filename = _PS_CACHE_DIR_.'push/activity';
-        $this->allow_push = true;
 
         parent::__construct();
         $this->displayName = $this->l('Dashboard Products');
@@ -72,8 +69,6 @@ class DashProducts extends Module
         return (parent::install()
             && $this->registerHook('dashboardZoneTwo')
             && $this->registerHook('dashboardData')
-            && $this->registerHook('actionObjectOrderAddAfter')
-            && $this->registerHook('actionSearch')
         );
     }
 
@@ -698,22 +693,6 @@ class DashProducts extends Module
             'DASHPRODUCT_NBR_SHOW_MOST_VIEWED' => Configuration::get('DASHPRODUCT_NBR_SHOW_MOST_VIEWED'),
             'DASHPRODUCT_NBR_SHOW_TOP_SEARCH'  => Configuration::get('DASHPRODUCT_NBR_SHOW_TOP_SEARCH'),
         ];
-    }
-
-    /**
-     * @param mixed $params
-     */
-    public function hookActionObjectOrderAddAfter($params)
-    {
-        Tools::changeFileMTime($this->push_filename);
-    }
-
-    /**
-     * @param mixed $params
-     */
-    public function hookActionSearch($params)
-    {
-        Tools::changeFileMTime($this->push_filename);
     }
 
     /**
