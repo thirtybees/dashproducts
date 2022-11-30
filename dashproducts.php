@@ -34,6 +34,8 @@ class DashProducts extends Module
 {
     /**
      * DashProducts constructor.
+     *
+     * @throws PrestaShopException
      */
     public function __construct()
     {
@@ -56,6 +58,9 @@ class DashProducts extends Module
 
     /**
      * @return bool
+     * @throws HTMLPurifier_Exception
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
      */
     public function install()
     {
@@ -76,6 +81,9 @@ class DashProducts extends Module
      * @param array $params
      *
      * @return string
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
+     * @throws SmartyException
      */
     public function hookDashboardZoneTwo($params)
     {
@@ -99,6 +107,8 @@ class DashProducts extends Module
      * @param array $params
      *
      * @return array
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
      */
     public function hookDashboardData($params)
     {
@@ -121,6 +131,8 @@ class DashProducts extends Module
 
     /**
      * @return array
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
      */
     public function getTableRecentOrders()
     {
@@ -186,6 +198,8 @@ class DashProducts extends Module
      * @param string $dateTo
      *
      * @return array
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
      */
     public function getTableBestSellers($dateFrom, $dateTo)
     {
@@ -299,6 +313,8 @@ class DashProducts extends Module
      * @param string $dateTo
      *
      * @return array
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
      */
     public function getTableMostViewed($dateFrom, $dateTo)
     {
@@ -395,6 +411,8 @@ class DashProducts extends Module
      * @param string $dateTo
      *
      * @return array
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
      */
     public function getTableTop10MostSearch($dateFrom, $dateTo)
     {
@@ -463,9 +481,11 @@ class DashProducts extends Module
     /**
      * @param string $dateFrom
      * @param string $dateTo
-     * @param int    $idProduct
+     * @param int $idProduct
      *
      * @return int
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
      */
     public function getTotalProductSales($dateFrom, $dateTo, $idProduct)
     {
@@ -483,9 +503,11 @@ class DashProducts extends Module
     /**
      * @param string $dateFrom
      * @param string $dateTo
-     * @param int    $idProduct
+     * @param int $idProduct
      *
-     * @return false|null|string
+     * @return int
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
      */
     public function getTotalProductAddedCart($dateFrom, $dateTo, $idProduct)
     {
@@ -501,9 +523,11 @@ class DashProducts extends Module
     /**
      * @param string $dateFrom
      * @param string $dateTo
-     * @param int    $idProduct
+     * @param int $idProduct
      *
      * @return false|null|string
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
      */
     public function getTotalProductPurchased($dateFrom, $dateTo, $idProduct)
     {
@@ -521,9 +545,11 @@ class DashProducts extends Module
     /**
      * @param string $dateFrom
      * @param string $dateTo
-     * @param int    $limit
+     * @param int $limit
      *
      * @return array|false|null|PDOStatement
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
      */
     public function getTotalViewed($dateFrom, $dateTo, $limit = 10)
     {
@@ -560,9 +586,11 @@ class DashProducts extends Module
     /**
      * @param string $dateFrom
      * @param string $dateTo
-     * @param int    $limit
+     * @param int $limit
      *
      * @return array|false|null|PDOStatement
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
      */
     public function getMostSearchTerms($dateFrom, $dateTo, $limit = 10)
     {
@@ -583,6 +611,9 @@ class DashProducts extends Module
 
     /**
      * @return string
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
+     * @throws SmartyException
      */
     public function renderConfigForm()
     {
@@ -658,6 +689,7 @@ class DashProducts extends Module
 
     /**
      * @return array
+     * @throws PrestaShopException
      */
     public function getConfigFieldsValues()
     {
