@@ -55,7 +55,6 @@ class DashProducts extends Module
 
     /**
      * @return bool
-     * @throws HTMLPurifier_Exception
      * @throws PrestaShopDatabaseException
      * @throws PrestaShopException
      */
@@ -112,14 +111,12 @@ class DashProducts extends Module
         $tableMostViewed = $this->getTableMostViewed($params['date_from'], $params['date_to']);
         $tableTop10MostSearch = $this->getTableTop10MostSearch($params['date_from'], $params['date_to']);
 
-        //$table_top_5_search = $this->getTableTop5Search();
         return [
             'data_table' => [
                 'table_recent_orders'      => $tableRecentOrders,
                 'table_best_sellers'       => $tableBestSellers,
                 'table_most_viewed'        => $tableMostViewed,
                 'table_top_10_most_search' => $tableTop10MostSearch,
-                //'table_top_5_search' => $table_top_5_search
             ],
         ];
     }
@@ -457,23 +454,6 @@ class DashProducts extends Module
     }
 
     /**
-     * @return array
-     */
-    public function getTableTop5Search()
-    {
-        $header = [
-            [
-                'id'    => 'reference',
-                'title' => $this->l('Product'),
-            ],
-        ];
-
-        $body = [];
-
-        return ['header' => $header, 'body' => $body];
-    }
-
-    /**
      * @param string $dateFrom
      * @param string $dateTo
      * @param int $idProduct
@@ -589,7 +569,7 @@ class DashProducts extends Module
      */
     public function getMostSearchTerms($dateFrom, $dateTo, $limit = 10)
     {
-        if (!Module::isInstalled('statssearch')) {
+        if (! static::tableExists('statssearch')) {
             return [];
         }
 
@@ -717,5 +697,19 @@ class DashProducts extends Module
             }
         }
         return '';
+    }
+
+    /**
+     * @param $table
+     *
+     * @return bool
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
+     */
+    public static function tableExists($table)
+    {
+        $table = pSQL(_DB_PREFIX_ . $table);
+        $q = "SELECT 1 FROM information_schema.TABLES WHERE table_schema=database() AND table_name = '$table'";
+        return (bool)Db::getInstance()->getValue($q);
     }
 }
