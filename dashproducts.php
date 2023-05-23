@@ -712,4 +712,18 @@ class DashProducts extends Module
         $q = "SELECT 1 FROM information_schema.TABLES WHERE table_schema=database() AND table_name = '$table'";
         return (bool)Db::getInstance()->getValue($q);
     }
+
+    /**
+     * Save widged configuration
+     *
+     * @param array $params
+     * @throws PrestaShopException
+     */
+    public function saveDashConfig($params)
+    {
+        Configuration::updateValue('DASHPRODUCT_NBR_SHOW_LAST_ORDER', max(5, (int)$params['DASHPRODUCT_NBR_SHOW_LAST_ORDER']));
+        Configuration::updateValue('DASHPRODUCT_NBR_SHOW_BEST_SELLER', max(5, (int)$params['DASHPRODUCT_NBR_SHOW_BEST_SELLER']));
+        Configuration::updateValue('DASHPRODUCT_NBR_SHOW_MOST_VIEWED', max(5, (int)$params['DASHPRODUCT_NBR_SHOW_MOST_VIEWED']));
+        Configuration::updateValue('DASHPRODUCT_NBR_SHOW_TOP_SEARCH', max(5, (int)$params['DASHPRODUCT_NBR_SHOW_TOP_SEARCH']));
+    }
 }
