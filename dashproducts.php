@@ -577,7 +577,7 @@ class DashProducts extends Module
             (new DbQuery())
                 ->select('`keywords`, count(`id_statssearch`) AS count_keywords, `results`')
                 ->from('statssearch', 'ss')
-                ->where('ss.`date_add` BETWEEN "'.pSQL($dateFrom).'" AND "'.pSQL($dateTo).' "'.Shop::addSqlRestriction(false, 'ss'))
+                ->where('ss.`date_add` BETWEEN "'.pSQL($dateFrom).' 00:00:00" AND "'.pSQL($dateTo).' 23:59:59"'.Shop::addSqlRestriction(false, 'ss'))
                 ->groupBy('ss.`keywords`')
                 ->orderBy('`count_keywords` DESC')
                 ->limit((int) $limit)
